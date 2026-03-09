@@ -20,9 +20,6 @@
       "destination": "/index.html"
     }
   ],
-  "env": {
-    "VERCEL_URL": "@vercel_url"
-  },
   "buildCommand": "npm run build",
   "outputDirectory": "dist/todo-list",
   "framework": "angular"
