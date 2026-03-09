@@ -1,4 +1,4 @@
-import { Component, signal, effect } from '@angular/core';
+import { Component, signal } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 
@@ -23,14 +23,16 @@ export class App {
 
   constructor() {
     // Load todos from localStorage on init
-    effect(() => {
-      const saved = localStorage.getItem('todos');
-      if (saved) {
+    const saved = localStorage.getItem('todos');
+    if (saved) {
+      try {
         const parsed = JSON.parse(saved);
         this.todos.set(parsed);
         this.nextId = Math.max(...parsed.map((t: Todo) => t.id), 0) + 1;
+      } catch (e) {
+        console.error('Failed to load todos', e);
       }
-    });
+    }
   }
 
   protected get filteredTodos() {
