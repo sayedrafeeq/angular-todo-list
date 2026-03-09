@@ -11,12 +11,7 @@
   ],
   "routes": [
     {
-      "src": "^/(?!.*\\.\\w+$).*$",
-      "destination": "/index.html"
-    },
-    {
-      "src": "/.*",
-      "methods": ["GET"],
+      "src": "^/(?!.*\\.).*$",
       "destination": "/index.html"
     }
   ],
