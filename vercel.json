@@ -1,0 +1,29 @@
+{
+  "version": 2,
+  "builds": [
+    {
+      "src": "package.json",
+      "use": "@vercel/static-build",
+      "config": {
+        "distDir": "dist/todo-list"
+      }
+    }
+  ],
+  "routes": [
+    {
+      "src": "^/(?!.*\\.\\w+$).*$",
+      "destination": "/index.html"
+    },
+    {
+      "src": "/.*",
+      "methods": ["GET"],
+      "destination": "/index.html"
+    }
+  ],
+  "env": {
+    "VERCEL_URL": "@vercel_url"
+  },
+  "buildCommand": "npm run build",
+  "outputDirectory": "dist/todo-list",
+  "framework": "angular"
+}

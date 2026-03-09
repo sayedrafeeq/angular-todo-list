@@ -1,0 +1,77 @@
+<div class="app-container">
+  <header class="todo-header">
+    <h1>{{ title() }}</h1>
+  </header>
+
+  <main class="todo-main">
+    <div class="input-container">
+      <input 
+        type="text"
+        class="todo-input"
+        [(ngModel)]="newTodoTitle"
+        placeholder="What needs to be done?"
+        (keyup.enter)="addTodo()">
+      <button class="add-btn" (click)="addTodo()">Add Todo</button>
+    </div>
+
+    <div class="filter-container">
+      <button 
+        class="filter-btn"
+        [class.active]="filter() === 'all'"
+        (click)="filter.set('all')">
+        All
+      </button>
+      <button 
+        class="filter-btn"
+        [class.active]="filter() === 'active'"
+        (click)="filter.set('active')">
+        Active
+      </button>
+      <button 
+        class="filter-btn"
+        [class.active]="filter() === 'completed'"
+        (click)="filter.set('completed')">
+        Completed
+      </button>
+    </div>
+
+    <div class="todo-list">
+      @if (filteredTodos.length > 0) {
+        <ul>
+          @for (todo of filteredTodos; track todo.id) {
+            <li class="todo-item" [class.completed]="todo.completed">
+              <input 
+                type="checkbox" 
+                class="todo-checkbox"
+                [checked]="todo.completed"
+                (change)="toggleTodo(todo.id)">
+              <span class="todo-title">{{ todo.title }}</span>
+              <button 
+                class="delete-btn"
+                (click)="deleteTodo(todo.id)">
+                ✕
+              </button>
+            </li>
+          }
+        </ul>
+      } @else {
+        <p class="empty-message">No todos yet. Add one to get started!</p>
+      }
+    </div>
+
+    @if (todos().length > 0) {
+      <div class="todo-footer">
+        <span class="todo-count">
+          {{ activeCount }} active, {{ completedCount }} completed
+        </span>
+        @if (completedCount > 0) {
+          <button class="clear-btn" (click)="clearCompleted()">
+            Clear Completed
+          </button>
+        }
+      </div>
+    }
+  </main>
+</div>
+
+
