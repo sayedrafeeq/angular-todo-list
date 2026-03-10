@@ -15,7 +15,7 @@ interface Todo {
   styleUrl: './app.css'
 })
 export class App {
-  protected readonly title = signal('todo-list');
+  protected readonly title = signal('Todo List');
   protected todos = signal<Todo[]>([]);
   protected newTodoTitle = signal('');
   protected filter = signal<'all' | 'active' | 'completed'>('all');
